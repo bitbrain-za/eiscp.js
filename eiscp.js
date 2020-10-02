@@ -406,7 +406,10 @@ send_queue = async.queue(function (data, callback) {
 
         eiscp.write(eiscp_packet(data));
 
-        setTimeout(callback, config.send_delay, false);
+        if(0 != config.send_delay)
+            setTimeout(callback, config.send_delay, false);
+        else
+            callback(false, null);
         return;
     }
 
